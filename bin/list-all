@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# based on https://github.com/vic/asdf-gleam/blob/master/bin/list-all
+git ls-remote --tags --refs https://github.com/clojerl/clojerl | sed 's;^.*refs/tags/\(.*\)$;\1;' | xargs echo
