@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+releases_path=https://api.github.com/repos/clojerl/clojerl/tags
+cmd="curl -sL"
+if [ -n "$OAUTH_TOKEN" ]; then
+  cmd="$cmd -H 'Authorization: token $OAUTH_TOKEN'"
+fi
+cmd="$cmd $releases_path"
+
+sort_cmd='sort'
+if sort --help | grep -q -- '-V'; then
+  sort_cmd='sort -V'
+fi
+
+# Fetch all tag names, and get only second column. Then remove all unnecesary characters.
+versions=$(eval "$cmd" | \
+  tee | \
+  grep -oE "name\": \".{1,15}\"," | \
+  sed 's/name\": \"//;s/\",//' | \
+  "$sort_cmd" | \
+  tr '\n' ' ')
+
+echo "$versions"

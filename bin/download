@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -Eiuo pipefail
+
+printf "Downloading clojerl %s\n" "${ASDF_INSTALL_VERSION}"
+
+# This is needed because asdf prompts for permission to remove read-only git packfiles
+trap 'rm -rf "${ASDF_DOWNLOAD_PATH}/.git"' EXIT
+git clone --depth 1 --branch "$ASDF_INSTALL_VERSION" "https://github.com/clojerl/clojerl" "$ASDF_DOWNLOAD_PATH"
+
