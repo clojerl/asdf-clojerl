@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -Eiuo pipefail
+
+printf "Installing clojerl %s\n" "$ASDF_INSTALL_VERSION"
+
+if [[ "$ASDF_DOWNLOAD_PATH" == "" ]] ; then
+    tmpdir="$(mktemp -d -t 'asdf_XXXXXXXXXX')"
+    export ASDF_DOWNLOAD_PATH="$tmpdir"
+    trap 'rm -rf "$ASDF_DOWNLOAD_PATH"' EXIT
+    "$(dirname "$0")/download"
+fi
+
+cp -R "${ASDF_DOWNLOAD_PATH}/." "$ASDF_INSTALL_PATH"
+
+# Build from source in a subshell because we don't want to disturb current working dir
+# Reference: https://github.com/asdf-vm/asdf-elixir/blob/master/bin/install#L64
+(
+  cd "$ASDF_INSTALL_PATH" || exit;
+  make
+)
+
+if [ $? -ne 0 ]; then
+  echo "Build failed, cleaning..."
+  rm -rf "$ASDF_INSTALL_PATH"
+  exit 1
+fi
