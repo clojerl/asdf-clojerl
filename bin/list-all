@@ -17,7 +17,7 @@ versions=$(eval "$cmd" | \
   tee | \
   grep -oE "name\": \".{1,15}\"," | \
   sed 's/name\": \"//;s/\",//' | \
-  "$sort_cmd" | \
+  $sort_cmd | \
   tr '\n' ' ')
 
 echo "$versions"
