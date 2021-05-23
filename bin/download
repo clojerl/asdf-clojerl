@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -Eiuo pipefail
+set -Eeuo pipefail
 
 printf "Downloading clojerl %s\n" "${ASDF_INSTALL_VERSION}"
 

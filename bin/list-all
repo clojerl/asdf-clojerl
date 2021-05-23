@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -Eeuo pipefail
+
 releases_path=https://api.github.com/repos/clojerl/clojerl/tags
 cmd="curl -sL"
 if [ -n "$OAUTH_TOKEN" ]; then
