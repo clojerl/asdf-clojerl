@@ -12,12 +12,11 @@ asdf plugin-add clojerl https://github.com/clojerl/asdf-clojerl.git
 
 ## Use
 
-Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to install & manage versions of LFE.
+Check [asdf](https://github.com/asdf-vm/asdf) readme for instructions on how to install & manage versions of Clojerl.
 
 Example:
 ```
 asdf install clojerl ref:master
 ```
-
 
 Derived from [asdf-lfe](https://github.com/asdf-community/asdf-lfe) and [asdf-elixir](https://github.com/asdf-vm/asdf-elixir)
